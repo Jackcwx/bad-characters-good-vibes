@@ -1,6 +1,6 @@
 import db from '../connection'
 
-import { Character } from '@models/character'
+import { Character, CharacterData } from '@models/character'
 
 export async function getRandomCharacters(count: number): Promise<Character[]> {
   const tips = await db('characters')
@@ -15,4 +15,11 @@ export async function getRandomCharacters(count: number): Promise<Character[]> {
       'img_url as imgUrl',
     )
   return tips
+}
+
+export async function addCharacter(data: CharacterData): Promise<Character[]> {
+  const resp = await db('characters')
+    .select({ manager_id: data.managerId, name: data.name, bio: data.bio })
+    .insert(data)
+  return resp
 }
