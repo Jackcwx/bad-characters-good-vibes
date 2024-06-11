@@ -97,10 +97,7 @@ describe('character create', () => {
       name: 'Gerald',
       bio: 'The weirdest one out there',
     }
-    const res = await await request(server)
-      .post('/api/v1/characters')
-      .send(data)
-    console.log(res)
+    const res = await request(server).post('/api/v1/characters').send(data)
     expect(typeof res.body).toStrictEqual('number')
     expect(res.body).toStrictEqual(10)
     expect(res.status).toStrictEqual(200)
