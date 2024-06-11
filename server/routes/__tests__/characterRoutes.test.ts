@@ -90,12 +90,57 @@ describe('/random?count=', () => {
   })
 })
 
+describe('PATCH ./characters', () => {
+  it('patches a character', async () => {
+    const result = await request(server)
+      .patch('/api/v1/characters')
+      .send({
+        id: 1,
+        evilPoints: 5000,
+        goodPoints: 0,
+        bio: 'Hell Is About To Be Unleashed.',
+      })
+    expect(result.statusCode).toBe(200)
+    expect(result.body).toMatchInlineSnapshot(`
+      {
+        "data": {
+          "bio": "Hell Is About To Be Unleashed.",
+          "evilPoints": 5000,
+          "goodPoints": 0,
+          "id": 1,
+        },
+        "result": 1,
+      }
+    `)
+    expect(result.body.data.evilPoints).toStrictEqual(5000)
+  })
+
+  it('throws an error when something goes wrong', async () => {
+    vi.spyOn(db, 'patchCharacter').mockImplementation(() => {
+      throw new Error('patch failed')
+    })
+    vi.spyOn(console, 'error')
+    const result = await request(server)
+      .patch('/api/v1/characters')
+      .send({
+        id: 1,
+        evilPoints: 5000,
+        goodPoints: 0,
+        bio: 'Hell Is About To Be Unleashed.',
+      })
+    expect(result.status).toBe(500)
+    expect(result.body.error).toBe('Something went wrong.')
+    expect(console.error).toHaveBeenCalledWith('patch failed')
+  })
+})
+
 describe('character create', () => {
   const data = {
     manageId: 'jniervjn',
     name: 'Gerald',
     bio: 'The weirdest one out there',
   }
+
   it('returns the new index', async () => {
     const res = await request(server).post('/api/v1/characters').send(data)
     expect(typeof res.body).toStrictEqual('number')

@@ -17,6 +17,16 @@ export async function getRandomCharacters(count: number): Promise<Character[]> {
   return tips
 }
 
+export async function patchCharacter(updatedCharacter: Character) {
+  return await db('characters').where('id', updatedCharacter.id).update({
+    name: updatedCharacter.name,
+    bio: updatedCharacter.bio,
+    evil_points: updatedCharacter.evilPoints,
+    good_points: updatedCharacter.goodPoints,
+    img_url: updatedCharacter.imgUrl,
+  })
+}
+
 export async function addCharacter(data: CharacterData): Promise<number> {
   const resp = await db('characters').insert({
     manager_id: data.managerId,
