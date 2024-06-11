@@ -14,8 +14,6 @@ import connection from '../../db/connection.ts'
 import * as db from '../../db/functions/characterDB.ts'
 import server from '../../server.ts'
 
-import { Character } from '@models/character.ts'
-
 beforeAll(async () => {
   await connection.migrate.latest()
 })
@@ -94,7 +92,14 @@ describe('/random?count=', () => {
 
 describe('PATCH ./characters', () => {
   it('patches a character', async () => {
-    const result = await request(server).patch('/api/v1/characters').send({id: 1, evilPoints: 5000, goodPoints: 0, bio: 'Hell Is About To Be Unleashed.'})
+    const result = await request(server)
+      .patch('/api/v1/characters')
+      .send({
+        id: 1,
+        evilPoints: 5000,
+        goodPoints: 0,
+        bio: 'Hell Is About To Be Unleashed.',
+      })
     expect(result.statusCode).toBe(200)
     expect(result.body).toMatchInlineSnapshot(`
       {
@@ -115,7 +120,14 @@ describe('PATCH ./characters', () => {
       throw new Error('patch failed')
     })
     vi.spyOn(console, 'error')
-    const result = await request(server).patch('/api/v1/characters').send({id: 1, evilPoints: 5000, goodPoints: 0, bio: 'Hell Is About To Be Unleashed.'})
+    const result = await request(server)
+      .patch('/api/v1/characters')
+      .send({
+        id: 1,
+        evilPoints: 5000,
+        goodPoints: 0,
+        bio: 'Hell Is About To Be Unleashed.',
+      })
     expect(result.status).toBe(500)
     expect(result.body.error).toBe('Something went wrong.')
     expect(console.error).toHaveBeenCalledWith('patch failed')
@@ -128,7 +140,7 @@ describe('character create', () => {
     name: 'Gerald',
     bio: 'The weirdest one out there',
   }
-  
+
   it('returns the new index', async () => {
     const res = await request(server).post('/api/v1/characters').send(data)
     expect(typeof res.body).toStrictEqual('number')
