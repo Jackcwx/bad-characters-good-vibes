@@ -89,3 +89,20 @@ describe('/random?count=', () => {
     expect(console.error).toHaveBeenCalledWith('random failed')
   })
 })
+
+describe('character create', () => {
+  it('returns the new index', async () => {
+    const data = {
+      manageId: 'jniervjn',
+      name: 'Gerald',
+      bio: 'The weirdest one out there',
+    }
+    const res = await await request(server)
+      .post('/api/v1/characters')
+      .send(data)
+    console.log(res)
+    expect(typeof res.body).toStrictEqual('number')
+    expect(res.body).toStrictEqual(10)
+    expect(res.status).toStrictEqual(200)
+  })
+})
