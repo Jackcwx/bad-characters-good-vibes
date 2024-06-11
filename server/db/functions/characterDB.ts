@@ -16,3 +16,11 @@ export async function getRandomCharacters(count: number): Promise<Character[]> {
     )
   return tips
 }
+
+
+export async function getCharacterById(id: number): Promise<Character> {
+  const result = await db('characters').where({id}).select().first()
+  return result
+
+}
+
