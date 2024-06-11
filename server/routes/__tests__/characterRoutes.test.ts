@@ -89,3 +89,36 @@ describe('/random?count=', () => {
     expect(console.error).toHaveBeenCalledWith('random failed')
   })
 })
+
+describe('/id', () => {
+  it('returns a character by id', async () => {
+    //Arrange
+    const id = 3
+    //Act
+    const res = await request(server).get(`/api/v1/characters/${id}`)
+    //Assert
+    expect(res.status).toBe(200)
+    expect(res.body).toEqual(
+      expect.objectContaining({
+        id: expect.any(Number),
+        name: expect.any(String),
+        evilPoints: expect.any(Number),
+        goodPoints: expect.any(Number),
+        imgUrl: expect.any(String),
+      }),
+    )
+    expect(res.body.id).toBe(id)
+  })
+  it('returns an error when the db fails', async () => {
+    vi.spyOn(db, 'getCharacterById').mockImplementation(() => {
+      throw new Error('Error getting character')
+    })
+    vi.spyOn(console, 'error')
+    const id = 3
+    const res = await request(server).get(`/api/v1/characters/${id}`)
+    expect(res.status).toBe(500)
+    expect(res.body.error).toEqual('Something went wrong.')
+    expect(db.getCharacterById).toHaveBeenCalledWith(id)
+    expect(console.error).toHaveBeenCalledWith('Error getting character')
+  })
+})

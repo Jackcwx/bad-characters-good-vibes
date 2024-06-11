@@ -23,15 +23,20 @@ router.get('/random', async (req, res) => {
 })
 
 // GET /api/v1/:id
-router.get('/:id', async (req,res) => {
+router.get('/:id', async (req, res) => {
   const id = Number(req.params.id)
   try {
     const character = await db.getCharacterById(id)
     res.json(character)
   } catch (error) {
-    console.error(`Database error ${error}` )
-    res.sendStatus(500)
-    
+    if (error instanceof Error) {
+      console.error(error.message)
+    } else {
+      console.error('unknown error')
+    }
+    res.status(500).json({
+      error: `Something went wrong.`,
+    })
   }
 })
 

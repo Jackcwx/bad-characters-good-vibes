@@ -8,7 +8,6 @@ const server = express()
 server.use(express.json())
 
 server.use('/api/v1/characters', characterRoutes)
-// server.use('/api/v1/characters/:id', characterRoutes)
 server.use('/api/v1/managers', managerRoutes)
 
 if (process.env.NODE_ENV === 'production') {
