@@ -7,7 +7,7 @@ import { Popover, Transition } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { Fragment } from 'react'
 import { Link } from 'react-router-dom'
-import { Button } from '@/components/Button.tsx'
+import Login from './Login'
 
 const links = [
   { name: 'Random', to: '/random' },
@@ -63,10 +63,8 @@ export default function Navigation() {
           {/* DESKTOP */}
 
           <div className="hidden items-center text-secondary md:flex md:flex-row">
-            <span className="mr-5 text-sm lg:text-lg lg:leading-none">
-              Welcome
-            </span>
-            <Button type="none">Log in</Button>
+            <span className="mr-5 text-sm lg:text-lg lg:leading-none"></span>
+            <Login />
           </div>
         </div>
       </div>

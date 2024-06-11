@@ -14,13 +14,11 @@ describe('App renders', () => {
     })
     const navlinks = within(nav).getByRole('list')
     const randomLink = within(navlinks).getByText('Random')
-    const welcome = within(nav).getByText('Welcome')
 
     expect(homeLink).toBeInTheDocument()
     expect(navlinks.children).toHaveLength(2)
     expect(randomLink).toBeInTheDocument()
     expect(randomLink).toHaveAttribute('href', '/random')
-    expect(welcome.nextElementSibling).toHaveTextContent(/log in/i)
   })
 
   it('shows the footer content', async () => {

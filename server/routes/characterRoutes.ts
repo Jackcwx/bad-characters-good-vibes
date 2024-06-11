@@ -32,9 +32,25 @@ router.patch('/', async (req, res) => {
     } else {
       console.error('unknown error')
     }
-
     res.status(500).json({
-      error: 'Something went wrong.',
+      error: 'Something went wrong.'
+    })
+  }
+})
+
+router.post('/', async (req, res) => {
+  try {
+    const data = req.body
+    const id = await db.addCharacter(data)
+    res.json(id)
+  } catch (error) {
+    if (error instanceof Error) {
+      console.error(error.message)
+    } else {
+      console.error('unknown error')
+    }
+    res.status(500).json({
+      error: `Something went wrong.`,
     })
   }
 })
