@@ -55,9 +55,8 @@ Are you a lost in the everlasting struggle to spot good from evil? Do you find i
 #### Stretch
 
 1. As a user I want to be able to see comments and comment on characters
-2. As a user I want to be able to upload an image related to my project idea when I create it
-3. As a user I want to generate a character with an AI and see it in the character rotation
-4. As a manager I want to be able to search for images from an image API with a search box
+2. As a user I want to generate a character with an AI and see it in the character rotation
+3. As a manager I want to be able to search for images from an image API with a search box
 
 ### 2. Our tech stack
 
