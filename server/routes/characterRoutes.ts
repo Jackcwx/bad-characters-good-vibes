@@ -25,9 +25,17 @@ router.get('/random', async (req, res) => {
 router.patch('/', async (req, res) => {
   try {
     const result = await db.patchCharacter(req.body)
-    res.json({data: req.body, result: result}).sendStatus(200)
+    res.json({ data: req.body, result: result }).status(200)
   } catch (error) {
-    console.error(error)
+    if (error instanceof Error) {
+      console.error(error.message)
+    } else {
+      console.error('unknown error')
+    }
+
+    res.status(500).json({
+      error: 'Something went wrong.',
+    })
   }
 })
 

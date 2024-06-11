@@ -92,10 +92,6 @@ describe('/random?count=', () => {
   })
 })
 
-// const getCharById = async (id: number) => { 
-//   return await connection('characters').where({id}).first() as Character
-// }
-
 describe('PATCH ./characters', () => {
   it('patches a character', async () => {
     const result = await request(server).patch('/api/v1/characters').send({id: 1, evilPoints: 5000, goodPoints: 0, bio: 'Hell Is About To Be Unleashed.'})
@@ -115,10 +111,20 @@ describe('PATCH ./characters', () => {
 
     expect(result.body.data.evilPoints).toStrictEqual(5000)
 
-    // const newChar: Character = await getCharById(1)
-    // // const newChar: Character = await connection('characters').where({id: 1}).first()
+  })
 
-    // // expect(newChar.evilPoints).toStrictEqual(expect.any(Number))
-    // expect(newChar.evilPoints).toStrictEqual(5000)
+  it('throws an error when something goes wrong', async () => {
+
+    vi.spyOn(db, 'patchCharacter').mockImplementation(() => {
+      throw new Error('patch failed')
+    })
+    vi.spyOn(console, 'error')
+
+    const result = await request(server).patch('/api/v1/characters').send({id: 1, evilPoints: 5000, goodPoints: 0, bio: 'Hell Is About To Be Unleashed.'})
+    
+    expect(result.status).toBe(500)
+
+    expect(result.body.error).toBe('Something went wrong.')
+    expect(console.error).toHaveBeenCalledWith('patch failed')
   })
 })
