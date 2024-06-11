@@ -91,15 +91,27 @@ describe('/random?count=', () => {
 })
 
 describe('character create', () => {
+  const data = {
+    manageId: 'jniervjn',
+    name: 'Gerald',
+    bio: 'The weirdest one out there',
+  }
   it('returns the new index', async () => {
-    const data = {
-      manageId: 'jniervjn',
-      name: 'Gerald',
-      bio: 'The weirdest one out there',
-    }
     const res = await request(server).post('/api/v1/characters').send(data)
     expect(typeof res.body).toStrictEqual('number')
     expect(res.body).toStrictEqual(10)
     expect(res.status).toStrictEqual(200)
+  })
+
+  it('returns and error when the db fails', async () => {
+    vi.spyOn(db, 'addCharacter').mockImplementation(() => {
+      throw new Error('addCharacter failed')
+    })
+    vi.spyOn(console, 'error')
+    const res = await request(server).post('/api/v1/characters').send(data)
+    expect(res.status).toBe(500)
+    expect(res.body.error).toEqual('Something went wrong.')
+    expect(db.addCharacter).toHaveBeenCalledWith(data)
+    expect(console.error).toHaveBeenCalledWith('addCharacter failed')
   })
 })

@@ -22,12 +22,6 @@ router.get('/random', async (req, res) => {
   }
 })
 
-// {
-//  manager_id: "jniervjn",
-//  name: "Gerald",
-// bio: 'The weirdest one out there'
-// }
-
 router.post('/', async (req, res) => {
   try {
     const data = req.body
