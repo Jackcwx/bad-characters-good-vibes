@@ -17,9 +17,13 @@ export async function getRandomCharacters(count: number): Promise<Character[]> {
   return tips
 }
 
-export async function addCharacter(data: CharacterData): Promise<Character[]> {
-  const resp = await db('characters')
-    .select({ manager_id: data.managerId, name: data.name, bio: data.bio })
-    .insert(data)
-  return resp
+export async function addCharacter(data: CharacterData): Promise<number> {
+  const resp = await db('characters').insert({
+    manager_id: data.managerId,
+    name: data.name,
+    bio: data.bio,
+    evil_points: 0,
+    good_points: 0,
+  })
+  return resp[0]
 }

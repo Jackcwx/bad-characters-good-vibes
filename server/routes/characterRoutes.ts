@@ -22,4 +22,27 @@ router.get('/random', async (req, res) => {
   }
 })
 
+// {
+//  manager_id: "jniervjn",
+//  name: "Gerald",
+// bio: 'The weirdest one out there'
+// }
+
+router.post('/', async (req, res) => {
+  try {
+    const data = req.body
+    const id = await db.addCharacter(data)
+    res.json(id)
+  } catch (error) {
+    if (error instanceof Error) {
+      console.error(error.message)
+    } else {
+      console.error('unknown error')
+    }
+    res.status(500).json({
+      error: `Something went wrong.`,
+    })
+  }
+})
+
 export default router
