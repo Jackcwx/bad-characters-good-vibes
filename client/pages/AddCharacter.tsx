@@ -29,18 +29,19 @@ function AddCharacter() {
     })
   }
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.MouseEvent<Element, MouseEvent>) => {
     event.preventDefault()
-    // if (!user?.sub) {
-    //   alert('You must be logged in to add a character')
-    //   return
-    // }
+    if (!user?.sub) {
+      alert('You must be logged in to add a character')
+      console.error('Error: please log in') // Todo: mock out managerId in tests
+      return
+    }
     const characterDataWithUserId = {
       ...characterData,
-      // managerId: user?.sub as string,
+      managerId: user?.sub as string,
     }
-    // addCharacter.mutate(characterDataWithUserId)
-    addCharacter.mutate({})
+    console.log(characterDataWithUserId)
+    addCharacter.mutate(characterDataWithUserId)
   }
 
   const handleClear = (event: React.MouseEvent<Element, MouseEvent>) => {
@@ -59,19 +60,16 @@ function AddCharacter() {
     event.preventDefault()
   }
 
-  if (addCharacter.isError) {
-    console.log('ERRRRROOORRR: ', addCharacter.error)
-  }
   return (
     <>
       <>
         <PageTitle title="Create Character" />
         <div>
-          <Form onSubmit={handleSubmit}>
+          <Form>
             <label htmlFor="name">Name</label>
             <div className="mt-2">
               <input
-                type="name"
+                id="name"
                 name="name"
                 placeholder="Example"
                 value={characterData.name}
@@ -84,6 +82,7 @@ function AddCharacter() {
                 Bio
               </label>
               <textarea
+                id="bio"
                 name="bio"
                 value={characterData.bio}
                 onChange={handleChange}
@@ -91,15 +90,15 @@ function AddCharacter() {
               ></textarea>
             </div>
             <div className="mt-4">
-              <Button onClick={handleImageAdd} buttonType="button" type="green">
+              <Button onClick={handleImageAdd} type="green">
                 <FontAwesomeIcon icon={faUpload} />
               </Button>
             </div>
             <div className="mt-4">
-              <Button type="green" data-testid="add-btn" onClick={() => {}}>
+              <Button type="green" data-testid="add-btn" onClick={handleSubmit}>
                 Add
               </Button>
-              <Button buttonType="button" type="green" onClick={handleClear}>
+              <Button type="green" onClick={handleClear}>
                 Clear
               </Button>
             </div>
