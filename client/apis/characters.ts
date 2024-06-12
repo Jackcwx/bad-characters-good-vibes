@@ -7,7 +7,7 @@ export async function getCharacters(): Promise<Character[]> {
   return response.body.tips
 }
 
-export async function getCharacter(id: number): Promise<Character> {
+export async function getCharacterById(id: number): Promise<Character> {
   const res = await request.get(`/api/v1/characters/${id}`)
-  return res.body.CharacterData
+  return res.body
 }
