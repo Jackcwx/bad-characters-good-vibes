@@ -1,12 +1,18 @@
 import { Character } from '@models/character'
+import { ReactEventHandler } from 'react'
 
 interface Props {
   character: Character
 }
 
 export default function Card(props: Props) {
+
+  function handleClick() {
+    return console.log(props.character.id) 
+  }
+
   return (
-    <div className="h-full w-1/4 rounded-[24px] shadow-md hover:shadow-xl hover:scale-105 duration-150">
+    <button className="h-[40em] w-[25em] rounded-[24px] shadow-md hover:shadow-xl hover:scale-105 duration-75" onClick={handleClick}>
       <div className="relative rounded-t-[20px] h-1/2 w-full overflow-hidden">
         <img
           className="object-cover h-full w-full"
@@ -17,11 +23,12 @@ export default function Card(props: Props) {
           {props.character.name}
         </p>
       </div>
-      <div className="h-1/2 z-20 text-black bg-green rounded-b-[20px] ">
-        <p>{props.character.bio}</p>
+      <div className="h-1/2 z-20 text-black bg-green rounded-b-[20px] border-box border-4 border-t-0 p-4">
+        <p className="text-lg border-b-2 pb-2">Bio:</p>
+        <p className="pt-2">{props.character.bio}</p>
         <p>{props.character.goodPoints}</p>
         <p>{props.character.evilPoints}</p>
       </div>
-    </div>
+    </button>
   )
 }
