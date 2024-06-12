@@ -90,16 +90,48 @@ describe('/random?count=', () => {
   })
 })
 
+describe('/id', () => {
+  it('returns a character by id', async () => {
+    //Arrange
+    const id = 3
+    //Act
+    const res = await request(server).get(`/api/v1/characters/${id}`)
+    //Assert
+    expect(res.status).toBe(200)
+    expect(res.body).toEqual(
+      expect.objectContaining({
+        id: expect.any(Number),
+        name: expect.any(String),
+        evilPoints: expect.any(Number),
+        goodPoints: expect.any(Number),
+        imgUrl: expect.any(String),
+      }),
+    )
+    expect(res.body.id).toBe(id)
+  })
+
+  it('returns an error when the db fails', async () => {
+    vi.spyOn(db, 'getCharacterById').mockImplementation(() => {
+      throw new Error('Error getting character')
+    })
+    vi.spyOn(console, 'error')
+    const id = 3
+    const res = await request(server).get(`/api/v1/characters/${id}`)
+    expect(res.status).toBe(500)
+    expect(res.body.error).toEqual('Something went wrong.')
+    expect(db.getCharacterById).toHaveBeenCalledWith(id)
+    expect(console.error).toHaveBeenCalledWith('Error getting character')
+  })
+})
+
 describe('PATCH ./characters', () => {
   it('patches a character', async () => {
-    const result = await request(server)
-      .patch('/api/v1/characters')
-      .send({
-        id: 1,
-        evilPoints: 5000,
-        goodPoints: 0,
-        bio: 'Hell Is About To Be Unleashed.',
-      })
+    const result = await request(server).patch('/api/v1/characters').send({
+      id: 1,
+      evilPoints: 5000,
+      goodPoints: 0,
+      bio: 'Hell Is About To Be Unleashed.',
+    })
     expect(result.statusCode).toBe(200)
     expect(result.body).toMatchInlineSnapshot(`
       {
@@ -120,14 +152,12 @@ describe('PATCH ./characters', () => {
       throw new Error('patch failed')
     })
     vi.spyOn(console, 'error')
-    const result = await request(server)
-      .patch('/api/v1/characters')
-      .send({
-        id: 1,
-        evilPoints: 5000,
-        goodPoints: 0,
-        bio: 'Hell Is About To Be Unleashed.',
-      })
+    const result = await request(server).patch('/api/v1/characters').send({
+      id: 1,
+      evilPoints: 5000,
+      goodPoints: 0,
+      bio: 'Hell Is About To Be Unleashed.',
+    })
     expect(result.status).toBe(500)
     expect(result.body.error).toBe('Something went wrong.')
     expect(console.error).toHaveBeenCalledWith('patch failed')

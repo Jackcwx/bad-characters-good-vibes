@@ -22,6 +22,24 @@ router.get('/random', async (req, res) => {
   }
 })
 
+// GET /api/v1/:id
+router.get('/:id', async (req, res) => {
+  const id = Number(req.params.id)
+  try {
+    const character = await db.getCharacterById(id)
+    res.json(character)
+  } catch (error) {
+    if (error instanceof Error) {
+      console.error(error.message)
+    } else {
+      console.error('unknown error')
+    }
+    res.status(500).json({
+      error: `Something went wrong.`,
+    })
+  }
+})
+
 router.patch('/', async (req, res) => {
   try {
     const result = await db.patchCharacter(req.body)
@@ -33,7 +51,7 @@ router.patch('/', async (req, res) => {
       console.error('unknown error')
     }
     res.status(500).json({
-      error: 'Something went wrong.'
+      error: 'Something went wrong.',
     })
   }
 })
