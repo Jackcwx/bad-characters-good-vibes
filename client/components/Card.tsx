@@ -1,18 +1,15 @@
 import { Character } from '@models/character'
-import { ReactEventHandler } from 'react'
 
 interface Props {
-  character: Character
+  key: number
+  character: Character,
+  onClick: () => void
 }
 
 export default function Card(props: Props) {
 
-  function handleClick() {
-    return console.log(props.character.id) 
-  }
-
   return (
-    <button className="h-[40em] w-[25em] rounded-[24px] shadow-md hover:shadow-xl hover:scale-105 duration-75" onClick={handleClick}>
+    <button className="h-[40em] w-[25em] rounded-[24px] shadow-md hover:shadow-xl hover:scale-105 duration-75" onClick={props.onClick}>
       <div className="relative rounded-t-[20px] h-1/2 w-full overflow-hidden">
         <img
           className="object-cover h-full w-full"
