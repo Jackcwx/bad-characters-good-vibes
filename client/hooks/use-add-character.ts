@@ -3,15 +3,13 @@ import request from 'superagent'
 import { CharacterData } from '../../models/character.ts'
 import { useNavigate } from 'react-router-dom'
 
-const rootUrl = new URL(`api/v1/characters`, document.baseURI).toString()
-
 export default function useAddCharacter() {
   const navigate = useNavigate()
   const queryClient = useQueryClient()
   return useMutation({
     mutationFn: async (data: CharacterData) => {
       console.log('data: ', data)
-      const res = await request.post(`${rootUrl}`).send(data)
+      const res = await request.post(`api/v1/characters`).send(data)
 
       return res.body
     },
