@@ -1,6 +1,7 @@
 import { Route, createRoutesFromElements } from 'react-router-dom'
 
 import App from '@/components/layout/App'
+import Game from './components/Game'
 import Home from '@/pages/Home'
 import Leaderboard from '@/pages/Leaderboard.tsx'
 import Character from '@/pages/Character.tsx'
@@ -12,6 +13,7 @@ import NotFound from '@/pages/NotFound'
 export const routes = createRoutesFromElements(
   <Route path="/" element={<App />}>
     <Route index element={<Home />} />
+    <Route path="/game" element={<Game />} />
     <Route path="/character/:id" element={<Character />} />
     <Route path="/random" element={<Random />} />
     <Route path="/leaderboard" element={<Leaderboard />} />
