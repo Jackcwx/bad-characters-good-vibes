@@ -28,6 +28,7 @@
     "extends": "@devacademy/eslint-config/react"
   },
   "dependencies": {
+    "@testing-library/dom": "^10.1.0",
     "dotenv": "^10.0.0",
     "express": "^4.17.2",
     "knex": "^2.5.1",
