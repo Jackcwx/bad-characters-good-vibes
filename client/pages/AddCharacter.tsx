@@ -31,11 +31,16 @@ function AddCharacter() {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
+    // if (!user?.sub) {
+    //   alert('You must be logged in to add a character')
+    //   return
+    // }
     const characterDataWithUserId = {
       ...characterData,
-      managerId: user.sub as string,
+      // managerId: user?.sub as string,
     }
-    addCharacter.mutate(characterDataWithUserId)
+    // addCharacter.mutate(characterDataWithUserId)
+    addCharacter.mutate({})
   }
 
   const handleClear = (event: React.MouseEvent<Element, MouseEvent>) => {
@@ -50,6 +55,13 @@ function AddCharacter() {
     })
   }
 
+  function handleImageAdd(event: React.MouseEvent<Element, MouseEvent>) {
+    event.preventDefault()
+  }
+
+  if (addCharacter.isError) {
+    console.log('ERRRRROOORRR: ', addCharacter.error)
+  }
   return (
     <>
       <>
@@ -57,48 +69,34 @@ function AddCharacter() {
         <div>
           <Form onSubmit={handleSubmit}>
             <label htmlFor="name">Name</label>
-            <div style={{ marginTop: '5px' }}>
+            <div className="mt-2">
               <input
                 type="name"
                 name="name"
                 placeholder="Example"
                 value={characterData.name}
                 onChange={handleChange}
-                style={{
-                  padding: '5px',
-                  width: '50%',
-                  border: '1px solid white',
-                }}
+                className="px-2 py-1 w-1/2 border border-solid border-white"
               ></input>
             </div>
-            <div style={{ marginTop: '5px' }}>
-              <label
-                htmlFor="bio"
-                style={{ display: 'block', marginBottom: '5px' }}
-              >
+            <div className="mt-2">
+              <label htmlFor="bio" className="block mb-1">
                 Bio
               </label>
               <textarea
                 name="bio"
                 value={characterData.bio}
                 onChange={handleChange}
-                style={{
-                  width: '100%',
-                  padding: '5px',
-                  height: '150px',
-                  border: '1px solid white',
-                  boxSizing: 'border-box',
-                  color: 'black',
-                }}
+                className="w-full p-3 h-36 border border-white box-border text-black"
               ></textarea>
             </div>
-            <div style={{ marginTop: '10px' }}>
-              <Button buttonType="button" type="green">
+            <div className="mt-4">
+              <Button onClick={handleImageAdd} buttonType="button" type="green">
                 <FontAwesomeIcon icon={faUpload} />
               </Button>
             </div>
-            <div style={{ marginTop: '15px' }}>
-              <Button type="green" onClick={() => {}}>
+            <div className="mt-4">
+              <Button type="green" data-testid="add-btn" onClick={() => {}}>
                 Add
               </Button>
               <Button buttonType="button" type="green" onClick={handleClear}>
