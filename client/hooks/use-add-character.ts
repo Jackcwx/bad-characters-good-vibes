@@ -8,7 +8,7 @@ export default function useAddCharacter() {
   const queryClient = useQueryClient()
   return useMutation({
     mutationFn: async (data: CharacterData) => {
-      const res = await request.post('/api/v1/character').send(data)
+      const res = await request.post('/api/v1/characters').send(data)
       return res.body
     },
     onSuccess: async (id) => {
