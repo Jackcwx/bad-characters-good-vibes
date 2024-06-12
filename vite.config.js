@@ -17,5 +17,8 @@ export default defineConfig({
   },
   test: {
     globals: true,
+    environmentOptions: {
+      jsdom: { url: 'http://localhost:80' },
+    },
   },
 })
