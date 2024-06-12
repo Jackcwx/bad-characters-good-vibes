@@ -5,10 +5,12 @@ import { Form } from 'react-router-dom'
 import { faUpload } from '@fortawesome/free-solid-svg-icons'
 import useAddCharacter from '@/hooks/use-add-character'
 import { useState } from 'react'
-import { CharacterData } from '@models/character'
+import { useAuth0 } from '@auth0/auth0-react'
 
 function AddCharacter() {
   const addCharacter = useAddCharacter()
+  const { user } = useAuth0()
+
   const [characterData, setCharacterData] = useState({
     managerId: '',
     name: '',
@@ -27,9 +29,13 @@ function AddCharacter() {
     })
   }
 
-  const handleSubmit = (event: React.MouseEvent<Element, MouseEvent>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    addCharacter.mutate(characterData)
+    const characterDataWithUserId = {
+      ...characterData,
+      managerId: user.sub as string,
+    }
+    addCharacter.mutate(characterDataWithUserId)
   }
 
   const handleClear = (event: React.MouseEvent<Element, MouseEvent>) => {
@@ -50,7 +56,7 @@ function AddCharacter() {
         <PageTitle title="Create Character" />
         <div>
           <Form onSubmit={handleSubmit}>
-            <label>Name</label>
+            <label htmlFor="name">Name</label>
             <div style={{ marginTop: '5px' }}>
               <input
                 type="name"
@@ -66,7 +72,10 @@ function AddCharacter() {
               ></input>
             </div>
             <div style={{ marginTop: '5px' }}>
-              <label style={{ display: 'block', marginBottom: '5px' }}>
+              <label
+                htmlFor="bio"
+                style={{ display: 'block', marginBottom: '5px' }}
+              >
                 Bio
               </label>
               <textarea
@@ -89,7 +98,7 @@ function AddCharacter() {
               </Button>
             </div>
             <div style={{ marginTop: '15px' }}>
-              <Button type="green" onClick={handleSubmit}>
+              <Button type="green" onClick={() => {}}>
                 Add
               </Button>
               <Button buttonType="button" type="green" onClick={handleClear}>

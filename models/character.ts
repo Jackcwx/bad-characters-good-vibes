@@ -1,5 +1,5 @@
 export interface CharacterData {
-  managerId: number
+  managerId: string
   name: string
   bio: string
   evilPoints: number
