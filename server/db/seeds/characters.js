@@ -31,7 +31,7 @@ export const seed = async function (knex) {
       evil_points: 70,
       good_points: 10,
       img_url:
-        'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.craiyon.com%2Fimage%2FVZzJzWH8Sz267iDArSrzhQ&psig=AOvVaw3UmHhkIiVGv-bPRp3gZBme&ust=1718144374078000&source=images&cd=vfe&opi=89978449&ved=2ahUKEwj1sf7ZiNKGAxVAbmwGHbxvDsMQjRx6BAgAEBU',
+        'https://pics.craiyon.com/2024-01-01/640H0qXNSc6Fpl9GOull9g.webp',
     },
     {
       manager_id: '2',
