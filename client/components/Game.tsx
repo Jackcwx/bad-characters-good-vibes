@@ -4,30 +4,41 @@ import useCharacters from '@/hooks/useCharacters'
 // import { getCharacters } from '@/apis/characters'
 
 export default function Game() {
-
   const character = useCharacters()
-  const { data: chars, isPending, isError, error } = useCharacters().getCharacters(2)
+  const {
+    data: chars,
+    isPending,
+    isError,
+    error,
+  } = useCharacters().getCharacters(2)
 
-  if (isPending) { return <p>Loading...</p>}
-  if (isError) { return <p>Error... {error.message}</p> }
+  if (isPending) {
+    return <p>Loading...</p>
+  }
+  if (isError) {
+    return <p>Error...</p>
+  }
 
   function handleClick(char: Character, i: number) {
-
-    if (isPending) { return console.log('loading...')}
-    if (isError) { return console.log(error.message) }
+    if (isPending) {
+      return console.log('loading...')
+    }
+    if (isError) {
+      return console.log(error.message)
+    }
 
     const charOne: Character = chars[0]
     const charTwo: Character = chars[1]
 
     if (i === 0) {
-      const newCharOne = {...charOne, evilPoints: (charOne.evilPoints += 10)}
+      const newCharOne = { ...charOne, evilPoints: (charOne.evilPoints += 10) }
       character.update(newCharOne)
-      const newCharTwo = {...charTwo, evilPoints: (charTwo.evilPoints -= 5)}
+      const newCharTwo = { ...charTwo, evilPoints: (charTwo.evilPoints -= 5) }
       character.update(newCharTwo)
     } else {
-      const newCharOne = {...charOne, evilPoints: (charOne.evilPoints -= 5)}
+      const newCharOne = { ...charOne, evilPoints: (charOne.evilPoints -= 5) }
       character.update(newCharOne)
-      const newCharTwo = {...charTwo, evilPoints: (charTwo.evilPoints += 10)}
+      const newCharTwo = { ...charTwo, evilPoints: (charTwo.evilPoints += 10) }
       character.update(newCharTwo)
     }
   }
@@ -35,8 +46,12 @@ export default function Game() {
   // CHANGE HANDLECLICK TO INCREASE SELECTED INDEX AND DECREASE THE OTHERS, NO MATTER HOW MANY CARDS ARE REQUESTED
 
   return (
-    <div className="flex justify-around h-[90%] align-middle bg-blue p-4">
-      {chars.map((char: Character, i: number ) => { return <Card key={char.id} character={char} onClick={() => handleClick(char, i)}  /> })}
+    <div className="flex justify-around h-full p-4 my-auto">
+      {chars.map((char: Character, i: number) => {
+        return (
+          <Card key={i} character={char} onClick={() => handleClick(char, i)} />
+        )
+      })}
     </div>
   )
 }
