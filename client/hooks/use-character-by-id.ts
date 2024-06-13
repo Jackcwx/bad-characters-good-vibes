@@ -6,6 +6,6 @@ export function useCharacterById(id: number) {
     queryKey: ['characters'],
     queryFn: () => getCharacterById(id),
   })
-  console.log(query)
+  
   return query
 }

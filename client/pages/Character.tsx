@@ -1,4 +1,3 @@
-import PageTitle from '@/components/PageTitle'
 import { useCharacterById } from '@/hooks/use-character-by-id'
 import { useParams } from 'react-router-dom'
 
@@ -6,9 +5,11 @@ function CharacterById() {
   // get id from useParams
   const { id } = useParams()
   // call our custom hook with the id
+  console.log(id)
   const { data: character, isPending, isError } = useCharacterById(id)
-  if (isPending) return <p>Loading..</p>
   if (isError) return <p>There was a error</p>
+  if (isPending) return <p>Loading..</p>
+
   console.log(character)
 
   return (

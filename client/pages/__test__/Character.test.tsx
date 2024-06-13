@@ -1,39 +1,50 @@
+//@vitest-environment jsdom
 import { describe, it, expect } from 'vitest'
-import { JSDOM } from 'jsdom'
-import server from '../../../server/server.ts'
-import request from 'supertest'
-import { useCharacterById } from '../hooks/use-character-by-id'
-import { within } from '@testing-library/dom'
+import { within } from '@testing-library/react/pure'
+import nock from 'nock'
 
-const render = (response) => {
-  const { document } = new JSDOM(response.text).window
-  return within(document)
+import { renderRoute } from '../../test/setup.tsx'
+
+nock.disableNetConnect()
+const id = 1
+const mockCharacter = {
+  id: 1,
+  managerId: 29284,
+  name: 'johnny0',
+  evilPoints: 200,
+  goodPoints: 100,
+  imgUrl: 'www.thistheimagefile.com',
 }
-export default render
 
-describe('Character front-end tests', () => {
-  it('contains the character data', () => {
-    const characterId = 1
-    const { data: character } = useCharacterById(characterId)
-    return request(server)
-      .get('/api/v1/characters/id')
-      .then((response) => {
-        const screen = render(response)
-        const name = screen.getByText(character.name)
-        const id = screen.getByText(character.id)
-        const managerId = screen.getByText(character.managerId)
-        const bio = screen.getByText(character.bio)
-        const evilPoints = screen.getByText(character.evilPoints)
-        const goodPoints = screen.getByText(character.goodPoints)
-        const imgUrl = screen.getByText(character.imgUrl)
+describe('Character rendering tests', () => {
+  it('renders a character info', async () => {
+    // ARRANGE
 
-        expect(name).toBeInTheDocument()
-        expect(id).toBeInTheDocument()
-        expect(managerId).toBeInTheDocument()
-        expect(bio).toBeInTheDocument()
-        expect(evilPoints).toBeInTheDocument()
-        expect(goodPoints).toBeInTheDocument()
-        expect(imgUrl).toBeInTheDocument()
-      })
+    const scope = nock('http://localhost')
+      .get(`/api/v1/characters/${id}`)
+      .reply(200, mockCharacter)
+
+    // ACT
+
+    const screen = renderRoute(`/character/${id}`)
+
+    // ASSERT
+    const name = await screen.findByRole('heading', { level: 3 })
+    
+    expect(name).toBeInTheDocument()
+    expect(name).toHaveTextContent(mockCharacter.name)
+    expect(scope.isDone()).toBe(true)
+  })
+
+  it('should render an error message when things go wrong', async () => {
+    const scope = nock('http://localhost')
+      .get(`/api/v1/characters/${id}`)
+      .reply(500)
+
+    const screen = renderRoute(`/character/${id}`)
+
+    const error = await screen.findByText('There was a error')
+    expect(error).toBeVisible()
+    expect(scope.isDone()).toBe(true)
   })
 })
