@@ -1,8 +1,6 @@
 import { Button } from '@/components/Button'
 import PageTitle from '@/components/PageTitle'
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Form } from 'react-router-dom'
-// import { faUpload } from '@fortawesome/free-solid-svg-icons'
 import useAddCharacter from '@/hooks/use-add-character'
 import { useState } from 'react'
 import { useAuth0 } from '@auth0/auth0-react'
