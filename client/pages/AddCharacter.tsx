@@ -33,14 +33,12 @@ function AddCharacter() {
     event.preventDefault()
     if (!user?.sub) {
       alert('You must be logged in to add a character')
-      console.error('Error: please log in') // Todo: mock out managerId in tests
       return
     }
     const characterDataWithUserId = {
       ...characterData,
       managerId: user?.sub as string,
     }
-    console.log(characterDataWithUserId)
     addCharacter.mutate(characterDataWithUserId)
   }
 

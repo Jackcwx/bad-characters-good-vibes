@@ -5,9 +5,21 @@ import nock from 'nock'
 import userEvent from '@testing-library/user-event'
 import { useAuth0 } from '@auth0/auth0-react'
 
+// Mock out auth0
+vi.mock('@auth0/auth0-react')
+
+const ACCESS_TOKEN = 'mock-access-token'
+
 beforeAll(() => {
   nock.disableNetConnect()
   window.alert = vi.fn()
+  vi.mocked(useAuth0).mockReturnValue({
+    isAuthenticated: true,
+    user: { sub: 'auth0|123', nickname: 'bear' },
+    getAccessTokenSilently: vi.fn().mockReturnValue(ACCESS_TOKEN),
+    loginWithRedirect: vi.fn(),
+    logout: vi.fn(),
+  } as any)
 })
 
 afterAll(() => {
@@ -33,7 +45,7 @@ describe('clicking add on add triggers the use-add-character use mutation hook',
       .post('/api/v1/characters', {
         name: 'Cheeky monkey',
         bio: 'Is the cheekiest of monkeys',
-        managerId: undefined, //TODO: mock out manager id
+        managerId: 'auth0|123', //TODO: mock out manager id
         evilPoints: 0,
         goodPoints: 0,
         imgUrl: '',
