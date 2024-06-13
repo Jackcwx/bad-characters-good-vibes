@@ -1,11 +1,15 @@
 import { Button } from '@/components/Button'
 import PageTitle from '@/components/PageTitle'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Form } from 'react-router-dom'
-import { faUpload } from '@fortawesome/free-solid-svg-icons'
+// import { faUpload } from '@fortawesome/free-solid-svg-icons'
 import useAddCharacter from '@/hooks/use-add-character'
 import { useState } from 'react'
 import { useAuth0 } from '@auth0/auth0-react'
+// Cloudinary
+import { Cloudinary } from '@cloudinary/url-gen'
+import UploadWidget from '../components/UploadWidget'
+import { AdvancedImage, responsive, placeholder } from '@cloudinary/react'
 
 function AddCharacter() {
   const addCharacter = useAddCharacter()
@@ -19,6 +23,19 @@ function AddCharacter() {
     goodPoints: 0,
     imgUrl: '',
   })
+
+  // CLOUDINARY
+  const [publicId, setPublicId] = useState('')
+  const [cloudName] = useState('dun8vp0gv')
+  const [uploadPreset] = useState('nd6wu8gg')
+  const cld = new Cloudinary({ cloud: { cloudName: 'dun8vp0gv' } })
+
+  const [uwConfig] = useState({
+    cloudName,
+    uploadPreset,
+  })
+
+  const myImage = cld.image(publicId)
 
   const handleChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -54,9 +71,9 @@ function AddCharacter() {
     })
   }
 
-  function handleImageAdd(event: React.MouseEvent<Element, MouseEvent>) {
-    event.preventDefault()
-  }
+  // function handleImageAdd(event: React.MouseEvent<Element, MouseEvent>) {
+  //   event.preventDefault()
+  // }
 
   return (
     <>
@@ -88,9 +105,15 @@ function AddCharacter() {
               ></textarea>
             </div>
             <div className="mt-4">
-              <Button onClick={handleImageAdd} type="green">
-                <FontAwesomeIcon icon={faUpload} />
-              </Button>
+              <UploadWidget uwConfig={uwConfig} setPublicId={setPublicId} />
+
+              <div style={{ width: '800px' }}>
+                <AdvancedImage
+                  style={{ maxWidth: '100%' }}
+                  cldImg={myImage}
+                  plugins={[responsive(), placeholder()]}
+                />
+              </div>
             </div>
             <div className="mt-4">
               <Button type="green" data-testid="add-btn" onClick={handleSubmit}>
