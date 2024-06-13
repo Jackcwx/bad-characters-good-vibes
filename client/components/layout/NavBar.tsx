@@ -18,7 +18,7 @@ export default function Navigation() {
   return (
     <Popover as="nav" className="gradient-p-to-y relative">
       <div className="mx-auto max-w-7xl sm:px-2">
-        <div className="flex items-center justify-between py-4  lg:space-x-2">
+        <div className="flex items-center justify-between py-4 lg:space-x-2">
           {/* MOBILE */}
           <div className="-my-2 -mr-2 md:hidden">
             <Popover.Button className="inline-flex items-center justify-center rounded-md p-2 text-slate-600 mix-blend-luminosity hover:text-slate-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue">
