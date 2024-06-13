@@ -2,6 +2,7 @@ import request from 'superagent'
 import { Manager } from '../../models/user'
 
 const rootUrl = '/api/v1'
+const baseUrl = new URL('/api/v1/managers', document.baseURI)
 
 interface GetManagersFunction {
   token: string
@@ -11,7 +12,7 @@ export async function getManagers({
   token,
 }: GetManagersFunction): Promise<Manager | null> {
   return await request
-    .get(`${rootUrl}/managers`)
+    .get(`${baseUrl}`)
     .set('Authorization', `Bearer ${token}`)
     .then((res) => (res.body.manager ? res.body.manager : null))
     .catch((error) => console.error(error))
@@ -27,7 +28,7 @@ export async function addManagers({
   token,
 }: AddManagerFunction): Promise<Manager> {
   return request
-    .post(`${rootUrl}/managers`)
+    .post(`${baseUrl}`)
     .set('Authorization', `Bearer ${token}`)
     .send(newManager)
     .then((res) => res.body.manager)
