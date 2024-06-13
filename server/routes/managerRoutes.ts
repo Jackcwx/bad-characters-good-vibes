@@ -25,7 +25,7 @@ router.post('/', checkJwt, async (req: JwtRequest, res) => {
     const newManager = req.body
     const auth0id = req.auth?.sub
     const manager: Manager = await db.addManager(
-      ...newManager,
+      newManager as string,
       auth0id as string,
       0,
     )

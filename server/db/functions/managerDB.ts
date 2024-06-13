@@ -3,7 +3,10 @@ import db from '../connection'
 import { Manager } from '../../../models/user'
 
 export async function getManager(auth0_id: string): Promise<Manager> {
-  return db('managers').select('*').where({ auth0_id }).first()
+  return db('managers')
+    .select('auth0_id as auth0Id', 'name', 'prestige')
+    .where({ auth0_id })
+    .first()
 }
 
 export async function addManager(
