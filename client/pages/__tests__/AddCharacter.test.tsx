@@ -19,6 +19,7 @@ beforeAll(() => {
     getAccessTokenSilently: vi.fn().mockReturnValue(ACCESS_TOKEN),
     loginWithRedirect: vi.fn(),
     logout: vi.fn(),
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } as any)
 })
 
