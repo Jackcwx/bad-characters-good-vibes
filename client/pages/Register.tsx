@@ -61,7 +61,7 @@ function Register() {
     <div>
       <div>
         <IfAuth>
-          <h1>Enter your details</h1>
+          <h1>Enter your name 😈</h1>
           {errMsg && (
             <div>
               Error: {errMsg}
@@ -70,18 +70,16 @@ function Register() {
               </Button>
             </div>
           )}
-          <form>
-            <div>
-              <label htmlFor="manager">New Manager</label>
+          <form className="w-full max-w-sm">
+            <div className="flex items-center border-b border-teal-500 py-2">
               <input
+                className='appearance-none bg-transparent border-none w-full text-white mr-3 py-1 px-2 leading-tight focus:outline-none" type="text" placeholder="Jane Doe" aria-label="Full name'
                 type="text"
                 id="manager"
                 name="name"
                 value={form.name}
                 onChange={handleChange}
               />
-            </div>
-            <div>
               <Button type="none" onClick={handleSubmit}>
                 Register
               </Button>
