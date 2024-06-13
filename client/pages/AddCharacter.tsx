@@ -25,7 +25,7 @@ function AddCharacter() {
   })
 
   // CLOUDINARY
-  const [publicId, setPublicId] = useState('')
+  const [imageInfo, setImageInfo] = useState({ publicId: '', secure_url: '' })
   const [cloudName] = useState('dun8vp0gv')
   const [uploadPreset] = useState('nd6wu8gg')
   const cld = new Cloudinary({ cloud: { cloudName: 'dun8vp0gv' } })
@@ -35,7 +35,7 @@ function AddCharacter() {
     uploadPreset,
   })
 
-  const myImage = cld.image(publicId)
+  const myImage = cld.image(imageInfo.publicId)
 
   const handleChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -55,6 +55,7 @@ function AddCharacter() {
     const characterDataWithUserId = {
       ...characterData,
       managerId: user?.sub as string,
+      imgUrl: imageInfo.secure_url,
     }
     addCharacter.mutate(characterDataWithUserId)
   }
@@ -70,10 +71,6 @@ function AddCharacter() {
       imgUrl: '',
     })
   }
-
-  // function handleImageAdd(event: React.MouseEvent<Element, MouseEvent>) {
-  //   event.preventDefault()
-  // }
 
   return (
     <>
@@ -105,7 +102,7 @@ function AddCharacter() {
               ></textarea>
             </div>
             <div className="mt-4">
-              <UploadWidget uwConfig={uwConfig} setPublicId={setPublicId} />
+              <UploadWidget uwConfig={uwConfig} setImageInfo={setImageInfo} />
 
               <div style={{ width: '800px' }}>
                 <AdvancedImage
