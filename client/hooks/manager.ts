@@ -30,7 +30,8 @@ export function useManagersMutation<TData = unknown, TVariables = unknown>(
   const mutation = useMutation({
     mutationFn,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['managers'] })
+      queryClient.invalidateQueries({ queryKey: ['manager'] })
+      queryClient.refetchQueries()
     },
   })
 

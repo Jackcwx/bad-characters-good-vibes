@@ -13,7 +13,7 @@ export async function getManagers({
   return await request
     .get(`${rootUrl}/managers`)
     .set('Authorization', `Bearer ${token}`)
-    .then((res) => (res.body ? res.body : null))
+    .then((res) => (res.body.manager ? res.body.manager : null))
     .catch((error) => console.error(error))
 }
 
