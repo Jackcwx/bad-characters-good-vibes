@@ -53,3 +53,7 @@ export async function addCharacter(data: CharacterData): Promise<number> {
   })
   return resp[0]
 }
+
+export async function getTopFiveGoodCharacters() {
+  //   const resp = await db('characters').where()
+}

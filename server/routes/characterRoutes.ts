@@ -22,6 +22,22 @@ router.get('/random', async (req, res) => {
   }
 })
 
+// GET /api/v1/leaderboard
+router.get('/leaderboard', async (req, res) => {
+  try {
+    res.json()
+  } catch (error) {
+    if (error instanceof Error) {
+      console.error(error.message)
+    } else {
+      console.error('unknown error')
+    }
+    res.status(500).json({
+      error: `Something went wrong.`,
+    })
+  }
+})
+
 // GET /api/v1/:id
 router.get('/:id', async (req, res) => {
   const id = Number(req.params.id)
