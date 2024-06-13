@@ -1,7 +1,6 @@
 import request from 'superagent'
 import { Manager } from '../../models/user'
 
-const rootUrl = '/api/v1'
 const baseUrl = new URL('/api/v1/managers', document.baseURI)
 
 interface GetManagersFunction {
