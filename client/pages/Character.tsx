@@ -5,12 +5,9 @@ function CharacterById() {
   // get id from useParams
   const { id } = useParams()
   // call our custom hook with the id
-  console.log(id)
-  const { data: character, isPending, isError } = useCharacterById(id)
+  const { data: character, isPending, isError } = useCharacterById(Number(id))
   if (isError) return <p>There was a error</p>
   if (isPending) return <p>Loading..</p>
-
-  console.log(character)
 
   return (
     <div className="relative max-w-md mx-auto md:max-w-2xl mt-50 min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-xl mt-16">

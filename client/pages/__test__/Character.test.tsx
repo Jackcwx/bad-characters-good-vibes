@@ -1,6 +1,5 @@
 //@vitest-environment jsdom
 import { describe, it, expect } from 'vitest'
-import { within } from '@testing-library/react/pure'
 import nock from 'nock'
 
 import { renderRoute } from '../../test/setup.tsx'

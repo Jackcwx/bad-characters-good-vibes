@@ -6,19 +6,21 @@ function Login() {
   const { user, logout, loginWithRedirect } = useAuth0()
 
   const handleLogin = () => {
-    console.log('logging in')
-    return loginWithRedirect()
+    return loginWithRedirect({
+      authorizationParams: {
+        redirect_uri: `${window.location.origin}/register`,
+      },
+    })
   }
 
   const handleLogout = () => {
-    console.log('logging out')
     return logout()
   }
 
   return (
     <>
       <IfAuth>
-        {user && <p>Welcome {user?.nickname}</p>}
+        {user && <p className="px-5">Welcome {user?.nickname}</p>}
         <Button type="none" onClick={handleLogout}>
           Log out
         </Button>

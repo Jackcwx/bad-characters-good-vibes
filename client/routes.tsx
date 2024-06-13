@@ -8,6 +8,7 @@ import Random from '@/pages/Random.tsx'
 import Manager from '@/pages/Manager.tsx'
 import AddCharacter from '@/pages/AddCharacter.tsx'
 import NotFound from '@/pages/NotFound'
+import Register from './pages/Register'
 
 export const routes = createRoutesFromElements(
   <Route path="/" element={<App />}>
@@ -17,6 +18,7 @@ export const routes = createRoutesFromElements(
     <Route path="/leaderboard" element={<Leaderboard />} />
     <Route path="/managers/:auth0Id" element={<Manager />} />
     <Route path="/add-character" element={<AddCharacter />} />
+    <Route path="/register" element={<Register />} />
     <Route path="*" element={<NotFound />} />
-  </Route>
+  </Route>,
 )
