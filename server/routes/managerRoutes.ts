@@ -25,7 +25,18 @@ router.post('/', checkJwt, async (req: JwtRequest, res) => {
     const auth0id = req.auth?.sub
     const manager: Manager = await db.addManager(name, auth0id as string, 0)
 
-    res.json({ manager })
+    res.json({ manager }).status(200)
+  } catch (e) {
+    console.error(e)
+    res.status(500).send('something went wrong!')
+  }
+})
+
+router.get('/:managerId/characters', checkJwt, async (req, res) => {
+  try {
+    const managerId = String(req.params.managerId)
+    const characters = await db.getCharactersByManagerId(managerId)
+    res.json({ characters }).status(200)
   } catch (e) {
     console.error(e)
     res.status(500).send('something went wrong!')
