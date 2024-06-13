@@ -3,7 +3,7 @@ import { useQuery, useQueryClient } from "@tanstack/react-query"
 import request from "superagent"
 import { useMutation } from "@tanstack/react-query"
 
-const rootURL = '/api/v1'
+const baseUrl = new URL('/api/v1', document.baseURI)
 
 export default function useCharacters() {
 
@@ -11,7 +11,7 @@ export default function useCharacters() {
     return useQuery({
       queryKey: ['characters'],
       queryFn: async () => {
-        const result = await request.get(`${rootURL}/characters/random?count=${n}`)
+        const result = await request.get(`${baseUrl}/characters/random?count=${n}`)
         return result.body as Character[]
       }
     })
@@ -23,7 +23,7 @@ export default function useCharacters() {
 
     return useMutation({
       mutationFn: async (updatedCharacter: Character) => {
-        const res = await request.patch(`${rootURL}/characters`).send(updatedCharacter)
+        const res = await request.patch(`${baseUrl}/characters`).send(updatedCharacter)
         return res.body
       },
       onSuccess: () => {
