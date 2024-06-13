@@ -35,7 +35,7 @@ export default function Game() {
   // CHANGE HANDLECLICK TO INCREASE SELECTED INDEX AND DECREASE THE OTHERS, NO MATTER HOW MANY CARDS ARE REQUESTED
 
   return (
-    <div className="flex justify-around h-[90%] align-middle bg-blue p-4">
+    <div className="flex justify-around h-full bg-blue p-4 my-auto">
       {chars.map((char: Character, i: number ) => { return <Card key={char.id} character={char} onClick={() => handleClick(char, i)}  /> })}
     </div>
   )

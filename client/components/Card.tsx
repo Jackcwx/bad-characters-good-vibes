@@ -9,7 +9,7 @@ interface Props {
 export default function Card(props: Props) {
 
   return (
-    <button className="h-[40em] w-[25em] rounded-[24px] shadow-md hover:shadow-xl hover:scale-105 duration-75" onClick={props.onClick}>
+    <button className="h-[40em] w-[25em] rounded-[24px] shadow-md hover:shadow-xl hover:scale-105 duration-75 my-auto" onClick={props.onClick}>
       <div className="relative rounded-t-[20px] h-1/2 w-full overflow-hidden">
         <img
           className="object-cover h-full w-full"
