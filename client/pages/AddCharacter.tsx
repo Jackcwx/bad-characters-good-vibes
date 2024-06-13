@@ -10,6 +10,7 @@ import { useAuth0 } from '@auth0/auth0-react'
 import { Cloudinary } from '@cloudinary/url-gen'
 import UploadWidget from '../components/UploadWidget'
 import { AdvancedImage, responsive, placeholder } from '@cloudinary/react'
+import { fill } from '@cloudinary/url-gen/actions/resize'
 
 function AddCharacter() {
   const addCharacter = useAddCharacter()
@@ -36,6 +37,7 @@ function AddCharacter() {
   })
 
   const myImage = cld.image(imageInfo.publicId)
+  myImage.resize(fill().width(300).height(300))
 
   const handleChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -74,55 +76,63 @@ function AddCharacter() {
 
   return (
     <>
-      <>
-        <PageTitle title="Create Character" />
-        <div>
-          <Form>
-            <label htmlFor="name">Name</label>
-            <div className="mt-2">
-              <input
-                id="name"
-                name="name"
-                placeholder="Example"
-                value={characterData.name}
-                onChange={handleChange}
-                className="px-2 py-1 w-1/2 border border-solid border-white"
-              ></input>
-            </div>
-            <div className="mt-2">
-              <label htmlFor="bio" className="block mb-1">
-                Bio
-              </label>
-              <textarea
-                id="bio"
-                name="bio"
-                value={characterData.bio}
-                onChange={handleChange}
-                className="w-full p-3 h-36 border border-white box-border text-black"
-              ></textarea>
-            </div>
-            <div className="mt-4">
-              <UploadWidget uwConfig={uwConfig} setImageInfo={setImageInfo} />
-
-              <div style={{ width: '800px' }}>
-                <AdvancedImage
-                  style={{ maxWidth: '100%' }}
-                  cldImg={myImage}
-                  plugins={[responsive(), placeholder()]}
-                />
+      {user ? (
+        <>
+          <PageTitle title="Create Character" />
+          <div>
+            <Form>
+              <label htmlFor="name">Name</label>
+              <div className="mt-2">
+                <input
+                  id="name"
+                  name="name"
+                  placeholder="Example"
+                  value={characterData.name}
+                  onChange={handleChange}
+                  className="px-2 py-1 w-1/2 border border-solid border-white"
+                ></input>
               </div>
-            </div>
-            <div className="mt-4">
-              <Button type="green" data-testid="add-btn" onClick={handleSubmit}>
-                Add
-              </Button>
-              <Button type="green" onClick={handleClear}>
-                Clear
-              </Button>
-            </div>
-          </Form>
-        </div>
-      </>
+              <div className="mt-2">
+                <label htmlFor="bio" className="block">
+                  Bio
+                </label>
+                <textarea
+                  id="bio"
+                  name="bio"
+                  value={characterData.bio}
+                  onChange={handleChange}
+                  className="w-full p-3 h-36 mt-2 border border-white box-border text-black"
+                ></textarea>
+              </div>
+              <div className="mt-2">
+                <UploadWidget uwConfig={uwConfig} setImageInfo={setImageInfo} />
+
+                <div className="w-[300px] mt-2 mx-auto">
+                  <AdvancedImage
+                    className="max-w-full"
+                    cldImg={myImage}
+                    plugins={[responsive(), placeholder()]}
+                  />
+                </div>
+              </div>
+              <div className="mt-2">
+                <Button
+                  type="green"
+                  data-testid="add-btn"
+                  onClick={handleSubmit}
+                >
+                  Add
+                </Button>
+                <Button type="green" onClick={handleClear}>
+                  Clear
+                </Button>
+              </div>
+            </Form>
+          </div>
+        </>
+      ) : (
+        <p>You must be logged in to add a character</p>
+      )}
     </>
   )
 }

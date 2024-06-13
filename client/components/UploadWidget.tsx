@@ -1,16 +1,13 @@
 import { createContext, useEffect, useState } from 'react'
+import { CloudinaryResult, Uwconfig, ImageInfo } from '@models/cloudinary'
+/// <reference path="../../../models/cloudinary.d.ts" />
 
 // Create a context to manage the script loading state
-const CloudinaryScriptContext = createContext()
+const CloudinaryScriptContext = createContext({ loaded: false })
 
-interface Uwconfig {
-  cloudName: string
-  uploadPreset: string
-}
-
-interface Props {
+export interface Props {
   uwConfig: Uwconfig
-  setImageInfo: () => void // not the right type
+  setImageInfo: (imageInfo: ImageInfo) => void // not the right type
 }
 
 function UploadWidget({ uwConfig, setImageInfo }: Props) {
@@ -39,9 +36,10 @@ function UploadWidget({ uwConfig, setImageInfo }: Props) {
     if (loaded) {
       const myWidget = window.cloudinary.createUploadWidget(
         uwConfig,
-        (error, result) => {
+        (error: Error, result: CloudinaryResult) => {
           if (!error && result && result.event === 'success') {
             console.log('Done! Here is the image info: ', result.info)
+            console.log('result: ', result)
             setImageInfo({
               publicId: result.info.public_id,
               secure_url: result.info.secure_url,
@@ -49,8 +47,7 @@ function UploadWidget({ uwConfig, setImageInfo }: Props) {
           }
         },
       )
-
-      document.getElementById('upload_widget').addEventListener(
+      document.getElementById('upload_widget')!.addEventListener(
         'click',
         function () {
           myWidget.open()
