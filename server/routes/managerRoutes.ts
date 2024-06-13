@@ -12,8 +12,7 @@ router.get('/', checkJwt, async (req: JwtRequest, res) => {
     const auth0Id = req.auth?.sub
     const manager = await db.getManager(auth0Id as string)
 
-    res.json({ manager })
-    res.sendStatus(200)
+    res.json({ manager }).status(200)
   } catch (e) {
     console.error(e)
     res.status(500).send('something went wrong!')
@@ -22,13 +21,9 @@ router.get('/', checkJwt, async (req: JwtRequest, res) => {
 
 router.post('/', checkJwt, async (req: JwtRequest, res) => {
   try {
-    const newManager = req.body
+    const { name } = req.body as { name: string }
     const auth0id = req.auth?.sub
-    const manager: Manager = await db.addManager(
-      newManager as string,
-      auth0id as string,
-      0,
-    )
+    const manager: Manager = await db.addManager(name, auth0id as string, 0)
 
     res.json({ manager })
   } catch (e) {

@@ -12,10 +12,10 @@ const checkJwt = jwt({
     cache: true,
     rateLimit: true,
     jwksRequestsPerMinute: 5,
-    jwksUri: `${domain}/.well-known/jwks.json`,
+    jwksUri: `https://${domain}/.well-known/jwks.json`,
   }) as GetVerificationKey,
   audience: audience,
-  issuer: `${domain}`,
+  // issuer: `${domain}`,
   algorithms: ['RS256'],
 })
 

@@ -29,7 +29,10 @@ function Register() {
   const [form, setForm] = useState({ name: '' })
 
   useEffect(() => {
-    if (managers.data) navigate('/')
+    if (managers.data) {
+      console.log('working')
+      navigate('/')
+    }
   }, [managers.data, navigate])
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
