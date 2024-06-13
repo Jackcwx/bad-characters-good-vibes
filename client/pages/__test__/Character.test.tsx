@@ -30,7 +30,7 @@ describe('Character rendering tests', () => {
 
     // ASSERT
     const name = await screen.findByRole('heading', { level: 3 })
-    
+
     expect(name).toBeInTheDocument()
     expect(name).toHaveTextContent(mockCharacter.name)
     expect(scope.isDone()).toBe(true)
