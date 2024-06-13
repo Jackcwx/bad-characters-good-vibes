@@ -25,10 +25,7 @@ router.get('/random', async (req, res) => {
 // GET /api/v1/leaderboard
 router.get('/leaderboard', async (req, res) => {
   try {
-    const fiveGood = await db.getTopFiveGoodCharacters()
-    const fiveEvil = await db.getTopFiveEvilCharacters()
-    const fiveNeutral = await db.getTopFiveneutralCharacters()
-    res.json({ fiveGood, fiveEvil, fiveNeutral })
+    res.json()
   } catch (error) {
     if (error instanceof Error) {
       console.error(error.message)
