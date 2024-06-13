@@ -36,6 +36,18 @@ describe('Character rendering tests', () => {
     expect(scope.isDone()).toBe(true)
   })
 
+  it('Renders loading message', async () => {
+    const scope = nock('http://localhost')
+      .get(`/api/v1/characters/${id}`)
+      .reply(200)
+
+    const screen = renderRoute(`/character/${id}`)
+
+    const loading = await screen.findByText('Loading..')
+    expect(loading).toBeVisible()
+    expect(scope.isDone()).toBe(true)
+  })
+
   it('should render an error message when things go wrong', async () => {
     const scope = nock('http://localhost')
       .get(`/api/v1/characters/${id}`)
