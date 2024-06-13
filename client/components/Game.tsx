@@ -16,7 +16,7 @@ export default function Game() {
     return <p>Loading...</p>
   }
   if (isError) {
-    return <p>Error... {error.message}</p>
+    return <p>Error...</p>
   }
 
   function handleClick(char: Character, i: number) {
