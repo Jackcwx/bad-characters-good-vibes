@@ -13,3 +13,9 @@ export async function getCharacterById(id: number): Promise<Character> {
   const res = await request.get(`${baseUrl}/${id}`)
   return res.body
 }
+
+export async function getRandomCharacter(count: number): Promise<Character> {
+  const url = `${baseUrl}/random?=${count}`
+  const res = await request.get(url)
+  return res.body
+}
