@@ -16,29 +16,31 @@ function Leaderboard() {
   return (
     <>
       <PageTitle title="Leaderboard" />
-      <div className="MostEvil">
-        <h1>Most Evil</h1>
-        <ul>
-          {data.map((character: CharacterData) => (
-            <li key={character.fiveEvil.id}>{character.fiveEvil.name}</li>
-          ))}
-        </ul>
-      </div>
-      <div className="MostNeutral">
-        <h1>Most Neutral</h1>
-        <ul>
-          {data.map((character: CharacterData) => (
-            <li key={character.fiveGood.id}>{character.fiveGood.name}</li>
-          ))}
-        </ul>
-      </div>
-      <div className="MostGood">
-        <h1>Most Good</h1>
-        <ul>
-          {data.map((character: CharacterData) => (
-            <li key={character.fiveNeutral.id}>{character.fiveNeutral.name}</li>
-          ))}
-        </ul>
+      <div className="grid grid-cols-3 gap-4 text-black">
+        <div className="bg-white shadow-md rounded p-4">
+          <h1>Most Evil</h1>
+          <ul>
+            {data.fiveEvil.map((character: CharacterData) => (
+              <li key={character.id}>{character.name}</li>
+            ))}
+          </ul>
+        </div>
+        <div className="bg-white shadow-md rounded p-4">
+          <h1>Most Neutral</h1>
+          <ul>
+            {data.fiveGood.map((character: CharacterData) => (
+              <li key={character.id}>{character.name}</li>
+            ))}
+          </ul>
+        </div>
+        <div className="bg-white shadow-md rounded p-4">
+          <h1>Most Good</h1>
+          <ul>
+            {data.fiveNeutral.map((character: CharacterData) => (
+              <li key={character.id}>{character.name}</li>
+            ))}
+          </ul>
+        </div>
       </div>
     </>
   )
