@@ -9,6 +9,8 @@ import { Fragment } from 'react'
 import { Link } from 'react-router-dom'
 import Login from './Login'
 import AddCharacterButton from './AddCharacterButton.tsx'
+import ManagerPageButton from '../ManagerPageButton.tsx'
+import { IfAuth } from '../Auth.tsx'
 
 const links = [
   { name: 'Random', to: '/random' },
@@ -65,8 +67,11 @@ export default function Navigation() {
 
           <div className="hidden items-center text-secondary md:flex md:flex-row">
             <span className="mr-5 text-sm lg:text-lg lg:leading-none"></span>
-            <AddCharacterButton />
             <Login />
+            <ManagerPageButton />
+            <IfAuth>
+              <AddCharacterButton />
+            </IfAuth>
           </div>
         </div>
       </div>

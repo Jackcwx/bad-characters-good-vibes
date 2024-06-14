@@ -85,7 +85,7 @@ export const seed = async function (knex) {
       evil_points: 55,
       good_points: 10,
       img_url:
-        'https://static.wikia.nocookie.net/villains/images/b/b6/CountRugen.png/revision/latest?cb=20120921045828',
+        'https://static.wikia.nocookie.net/villains/images/b/b6/CountRugen.png',
     },
   ])
 }

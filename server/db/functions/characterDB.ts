@@ -50,6 +50,43 @@ export async function addCharacter(data: CharacterData): Promise<number> {
     bio: data.bio,
     evil_points: 0,
     good_points: 0,
+    img_url: data.imgUrl,
   })
   return resp[0]
+}
+
+export async function getTopFiveGoodCharacters() {
+  const fiveGood = await db('characters')
+    .select()
+    .orderBy('good_points', 'desc')
+    .limit(5)
+  return fiveGood
+}
+export async function getTopFiveEvilCharacters() {
+  const fiveEvil = await db('characters')
+    .select()
+    .orderBy('evil_points', 'desc')
+    .limit(5)
+  return fiveEvil
+}
+export async function getAllCharacters() {
+  const allCharacters = await db('characters').select()
+  return allCharacters
+}
+
+export async function getTopFiveneutralCharacters() {
+  const allCharacters = await getAllCharacters()
+  const charactersWithNeutralPoints = allCharacters.map((character) => {
+    const neutralPoints = Math.abs(
+      character.good_points - character.evil_points,
+    )
+    return {
+      ...character,
+      neutralPoints,
+    }
+  })
+  const fiveNeutral = charactersWithNeutralPoints
+    .sort((a, b) => a.neutralPoints - b.neutralPoints)
+    .slice(0, 5)
+  return fiveNeutral
 }
