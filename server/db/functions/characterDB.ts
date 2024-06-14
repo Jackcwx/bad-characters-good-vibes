@@ -50,6 +50,7 @@ export async function addCharacter(data: CharacterData): Promise<number> {
     bio: data.bio,
     evil_points: 0,
     good_points: 0,
+    img_url: data.imgUrl,
   })
   return resp[0]
 }

@@ -16,7 +16,7 @@ export const routes = createRoutesFromElements(
     <Route path="/character/:id" element={<Character />} />
     <Route path="/random" element={<Random />} />
     <Route path="/leaderboard" element={<Leaderboard />} />
-    <Route path="/managers/:auth0Id" element={<Manager />} />
+    <Route path="/managers/:managerId" element={<Manager />} />
     <Route path="/add-character" element={<AddCharacter />} />
     <Route path="/register" element={<Register />} />
     <Route path="*" element={<NotFound />} />

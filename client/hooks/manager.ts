@@ -4,6 +4,20 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 import * as API from '../apis/managers.js'
 import { useAuth0 } from '@auth0/auth0-react'
 
+export function useManagersCharacters(managerId: string) {
+  const { getAccessTokenSilently, user } = useAuth0()
+  const query = useQuery({
+    queryKey: ['characters'],
+    queryFn: async () => {
+      const token = await getAccessTokenSilently()
+      return API.getCharactersByManagerId({ token, managerId })
+    },
+    enabled: !!user,
+  })
+
+  return query
+}
+
 export function useManagers() {
   const { user, getAccessTokenSilently } = useAuth0()
 
