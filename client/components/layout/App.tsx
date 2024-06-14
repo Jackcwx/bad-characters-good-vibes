@@ -9,7 +9,7 @@ function App() {
       <header className="header">
         <Navigation/>
       </header>
-      <section className="font-sans w-100 mx-auto mb-auto px-2 min-[320px]:px-6 py-5 dark:bg-neutral-900 sm:max-w-2xl md:max-w-2xl lg:max-w-4xl xl:max-w-6xl">
+      <section className="font-sans w-screen h-[90%] mx-auto mb-auto px-2 min-[320px]:px-6 py-5 dark:bg-neutral-900 sm:max-w-2xl md:max-w-2xl lg:max-w-4xl xl:max-w-6xl">
        <Outlet />
       </section>
       <Footer />

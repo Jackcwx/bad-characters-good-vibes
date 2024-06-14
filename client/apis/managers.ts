@@ -36,15 +36,12 @@ export async function addManagers({
 }
 
 export async function getCharactersByManagerId({
-  token,
   managerId,
 }: {
-  token: string
   managerId: string
 }): Promise<Character[]> {
   return request
     .get(`${baseUrl}/${managerId}/characters`)
-    .set('Authorization', `Bearer ${token}`)
     .then((res) => {
       const response = res.body.characters ? res.body.characters : null
       return response as Character[]

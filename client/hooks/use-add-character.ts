@@ -14,7 +14,7 @@ export default function useAddCharacter() {
       return res.body
     },
     onSuccess: async (id) => {
-      queryClient.invalidateQueries({ queryKey: ['characters'] })
+      queryClient.invalidateQueries({ queryKey: ['characters', id] })
       navigate(`/character/${id}`)
     },
     onError: async () => {

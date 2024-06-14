@@ -6,6 +6,8 @@ function ManagerPageButton() {
   const navigate = useNavigate()
   const { user } = useAuth0()
 
+  if (!user) return <></>
+
   const handleClick = () => {
     navigate(`/managers/${user?.sub}`)
   }

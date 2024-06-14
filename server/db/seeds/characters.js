@@ -16,7 +16,7 @@ export const seed = async function (knex) {
         'https://s.yimg.com/ny/api/res/1.2/hKt8H4eikqEKzjM8I2Q3Dg--/YXBwaWQ9aGlnaGxhbmRlcjt3PTk2MDtoPTY0MDtjZj13ZWJw/https://media.zenfs.com/en/deadline.com/3980fa5eed2f60aa3d0abac4d0d205a6',
     },
     {
-      manager_id: '1',
+      manager_id: 'google-oauth2|107804123972815340859',
       name: 'Lady Laughs-a-Lot',
       bio: 'A sorceress whose laugh is so contagious it can cure sadness.',
       evil_points: 2,
@@ -34,7 +34,7 @@ export const seed = async function (knex) {
         'https://pics.craiyon.com/2024-01-01/640H0qXNSc6Fpl9GOull9g.webp',
     },
     {
-      manager_id: '2',
+      manager_id: 'google-oauth2|107804123972815340859',
       name: 'Captain Clumsy',
       bio: 'A hero who saves the day but usually trips over his own feet in the process.',
       evil_points: 3,
@@ -52,7 +52,7 @@ export const seed = async function (knex) {
         'https://hips.hearstapps.com/hmg-prod/images/maleficent-2-angelina-jolie-2-1557844235.jpg',
     },
     {
-      manager_id: '3',
+      manager_id: 'google-oauth2|107804123972815340859',
       name: 'The Hangry Hulk',
       bio: "A mild-mannered guy who turns into a ravenous monster when he's hungry.",
       evil_points: 50,
@@ -70,7 +70,7 @@ export const seed = async function (knex) {
         'https://easy-peasy.ai/cdn-cgi/image/quality=80,format=auto,width=700/https://fdczvxmwwjwpwbeeqcth.supabase.co/storage/v1/object/public/images/de3e249e-f1c6-4563-8dae-c76c1b8490d5/31fd274f-d650-400f-be83-fb8345ef7612.png',
     },
     {
-      manager_id: '3',
+      manager_id: 'google-oauth2|107804123972815340859',
       name: 'Major Mayhem',
       bio: 'A chaotic force who loves to create messes but has a heart of gold.',
       evil_points: 40,
@@ -79,7 +79,7 @@ export const seed = async function (knex) {
         'https://i.pinimg.com/736x/5a/54/b8/5a54b8dabe3288c84bf7d4ea845c56d0.jpg',
     },
     {
-      manager_id: '4',
+      manager_id: 'google-oauth2|107804123972815340859',
       name: 'Count Clueless',
       bio: 'A bumbling villain who never quite understands his own evil schemes.',
       evil_points: 55,

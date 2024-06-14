@@ -1,5 +1,5 @@
 import { useCharacterById } from '@/hooks/use-character-by-id'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 
 function CharacterById() {
   // get id from useParams
@@ -54,7 +54,9 @@ function CharacterById() {
             <i className="fas fa-map-marker-alt mr-2 text-slate-400 opacity-75">
               Managers ID:
             </i>
-            {character.managerId}
+            <Link to={`/managers/${character.managerId}`}>
+              {character.managerId}
+            </Link>
           </div>
         </div>
         <div className="mt-6 py-6 border-t border-slate-200 text-center">

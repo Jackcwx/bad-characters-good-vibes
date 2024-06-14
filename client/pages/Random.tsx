@@ -8,12 +8,15 @@ function Random() {
   if (isError) return <p>there was a error</p>
   if (isPending) return <p>Loading...</p>
   const randomCharacter = character[0]
-  console.log(randomCharacter)
+
   return (
     <>
       <PageTitle title="Random" />
       <Link to={`/character/${randomCharacter.id}`}>
-        Go to character: {randomCharacter.name}
+        <p className="text-2xl">
+          Go to character:{' '}
+          <span className="text-red">{randomCharacter.name}</span>
+        </p>
       </Link>
     </>
   )

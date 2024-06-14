@@ -13,6 +13,7 @@ const ACCESS_TOKEN = 'mock-access-token'
 beforeAll(() => {
   nock.disableNetConnect()
   window.alert = vi.fn()
+  vi.spyOn(console, 'error').mockImplementation(() => {})
   vi.mocked(useAuth0).mockReturnValue({
     isAuthenticated: true,
     user: { sub: 'auth0|123', nickname: 'bear' },

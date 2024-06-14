@@ -8,7 +8,6 @@ export default function useFetchLeaderboard() {
     queryKey: ['leaderboard'],
     queryFn: async () => {
       const res = await request.get(baseUrl)
-      console.log(res)
       return res.body
     },
   })

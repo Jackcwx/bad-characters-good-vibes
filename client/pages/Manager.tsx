@@ -1,8 +1,8 @@
-import { IfAuth, IfNotAuth } from '@/components/Auth'
+import { IfAuth } from '@/components/Auth'
 import PageTitle from '@/components/PageTitle'
 import AddCharacterButton from '@/components/layout/AddCharacterButton'
 import { useManagersCharacters } from '@/hooks/manager'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 
 function Manager() {
   const managerId = useParams().managerId
@@ -19,19 +19,21 @@ function Manager() {
   return (
     <>
       <PageTitle title="Manager" />
+
+      <div>
+        <ul>
+          {characters.map((char) => (
+            <Link key={char.id} to={`/character/${char.id}`}>
+              <li className="text-2xl">{char.name}</li>
+            </Link>
+          ))}
+        </ul>
+      </div>
       <IfAuth>
-        <div>
-          <ul>
-            {characters.map((char) => (
-              <li key={char.id}>{char.name}</li>
-            ))}
-          </ul>
+        <div className="mt-10">
+          <AddCharacterButton />
         </div>
-        <AddCharacterButton />
       </IfAuth>
-      <IfNotAuth>
-        <p>Please sign in</p>
-      </IfNotAuth>
     </>
   )
 }

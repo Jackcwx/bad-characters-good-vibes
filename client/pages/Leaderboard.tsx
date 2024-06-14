@@ -19,7 +19,7 @@ function Leaderboard() {
       <PageTitle title="Leaderboard" />
       <div className="grid grid-cols-3 gap-4 text-black">
         <div className="bg-white shadow-md rounded p-4">
-          <h1 className="font-title">Most Evil</h1>
+          <h1 className="font-title text-3xl">Most Evil</h1>
           <ul>
             {data.fiveEvil.map((character: Character) => (
               <Link key={character.id} to={`/character/${character.id}`}>
@@ -29,7 +29,7 @@ function Leaderboard() {
           </ul>
         </div>
         <div className="bg-white shadow-md rounded p-4">
-          <h1 className="font-title">Most Neutral</h1>
+          <h1 className="font-title text-3xl">Most Neutral</h1>
           <ul>
             {data.fiveNeutral.map((character: Character) => (
               <Link key={character.id} to={`/character/${character.id}`}>
@@ -39,7 +39,7 @@ function Leaderboard() {
           </ul>
         </div>
         <div className="bg-white shadow-md rounded p-4">
-          <h1 className="font-title">Most Good</h1>
+          <h1 className="font-title text-3xl">Most Good</h1>
           <ul>
             {data.fiveGood.map((character: Character) => (
               <Link key={character.id} to={`/character/${character.id}`}>

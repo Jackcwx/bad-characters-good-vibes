@@ -78,7 +78,7 @@ describe('/random?count=', () => {
     vi.spyOn(db, 'getRandomCharacters').mockImplementation(() => {
       throw new Error('random failed')
     })
-    vi.spyOn(console, 'error')
+    vi.spyOn(console, 'error').mockImplementation(() => {})
     const count = 2
     const res = await request(server)
       .get('/api/v1/characters/random')
@@ -114,7 +114,7 @@ describe('/id', () => {
     vi.spyOn(db, 'getCharacterById').mockImplementation(() => {
       throw new Error('Error getting character')
     })
-    vi.spyOn(console, 'error')
+    vi.spyOn(console, 'error').mockImplementation(() => {})
     const id = 3
     const res = await request(server).get(`/api/v1/characters/${id}`)
     expect(res.status).toBe(500)
@@ -151,7 +151,7 @@ describe('PATCH ./characters', () => {
     vi.spyOn(db, 'patchCharacter').mockImplementation(() => {
       throw new Error('patch failed')
     })
-    vi.spyOn(console, 'error')
+    vi.spyOn(console, 'error').mockImplementation(() => {})
     const result = await request(server).patch('/api/v1/characters').send({
       id: 1,
       evilPoints: 5000,
@@ -182,7 +182,7 @@ describe('character create', () => {
     vi.spyOn(db, 'addCharacter').mockImplementation(() => {
       throw new Error('addCharacter failed')
     })
-    vi.spyOn(console, 'error')
+    vi.spyOn(console, 'error').mockImplementation(() => {})
     const res = await request(server).post('/api/v1/characters').send(data)
     expect(res.status).toBe(500)
     expect(res.body.error).toEqual('Something went wrong.')
