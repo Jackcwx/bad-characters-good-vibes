@@ -1,10 +1,18 @@
 //@vitest-environment jsdom
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, beforeAll, vi, afterEach } from 'vitest'
 import nock from 'nock'
 
 import { renderRoute } from '../../test/setup.tsx'
 
-nock.disableNetConnect()
+beforeAll(() => {
+  nock.disableNetConnect()
+  vi.spyOn(console, 'error').mockImplementation(() => {})
+})
+
+afterEach(() => {
+  vi.clearAllMocks()
+})
+
 const id = 1
 const mockCharacter = {
   id: 1,

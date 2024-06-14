@@ -32,7 +32,7 @@ router.post('/', checkJwt, async (req: JwtRequest, res) => {
   }
 })
 
-router.get('/:managerId/characters', checkJwt, async (req, res) => {
+router.get('/:managerId/characters', async (req, res) => {
   try {
     const managerId = String(req.params.managerId)
     const characters = await db.getCharactersByManagerId(managerId)

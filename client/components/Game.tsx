@@ -29,7 +29,7 @@ export default function Game() {
       return console.log('loading...')
     }
     if (isError) {
-      return console.log(error.message)
+      return console.error(error.message)
     }
 
     const charOne: Character = chars[0]
