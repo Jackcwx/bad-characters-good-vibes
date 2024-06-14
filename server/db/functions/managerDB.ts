@@ -1,6 +1,7 @@
 import db from '../connection'
 
 import { Manager } from '../../../models/user'
+import { Character } from '@models/character'
 
 export async function getManager(auth0_id: string): Promise<Manager> {
   return db('managers')
@@ -19,4 +20,20 @@ export async function addManager(
     auth0_id,
     prestige,
   })
+}
+
+export async function getCharactersByManagerId(
+  manager_id: string,
+): Promise<Character[]> {
+  return db('characters')
+    .select(
+      'id',
+      'manager_id as managerId',
+      'name',
+      'bio',
+      'evil_points as evilPoints',
+      'good_points as goodPoints',
+      'img_url as imgUrl',
+    )
+    .where({ manager_id })
 }
