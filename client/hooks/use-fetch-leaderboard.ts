@@ -1,9 +1,4 @@
-import {
-  useQuery,
-  useMutation,
-  useQueryClient,
-  QueryKey,
-} from '@tanstack/react-query'
+import { useQuery, QueryKey } from '@tanstack/react-query'
 import request from 'superagent'
 
 const baseUrl = new URL('/api/v1/characters/leaderboard', document.baseURI)
