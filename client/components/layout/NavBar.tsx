@@ -9,6 +9,7 @@ import { Fragment } from 'react'
 import { Link } from 'react-router-dom'
 import Login from './Login'
 import AddCharacterButton from './AddCharacterButton.tsx'
+import ManagerPageButton from '../ManagerPageButton.tsx'
 
 const links = [
   { name: 'Random', to: '/random' },
@@ -67,6 +68,7 @@ export default function Navigation() {
             <span className="mr-5 text-sm lg:text-lg lg:leading-none"></span>
             <AddCharacterButton />
             <Login />
+            <ManagerPageButton />
           </div>
         </div>
       </div>

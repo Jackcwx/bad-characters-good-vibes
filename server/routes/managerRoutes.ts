@@ -35,7 +35,9 @@ router.post('/', checkJwt, async (req: JwtRequest, res) => {
 router.get('/:managerId/characters', checkJwt, async (req, res) => {
   try {
     const managerId = String(req.params.managerId)
+    console.log(managerId)
     const characters = await db.getCharactersByManagerId(managerId)
+    console.log(characters)
     res.json({ characters }).status(200)
   } catch (e) {
     console.error(e)
