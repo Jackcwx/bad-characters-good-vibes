@@ -27,7 +27,7 @@ router.get('/leaderboard', async (req, res) => {
   try {
     const fiveGood = await db.getTopFiveGoodCharacters()
     const fiveEvil = await db.getTopFiveEvilCharacters()
-    const fiveNeutral = await db.getTopFiveneutralCharacters()
+    const fiveNeutral = await db.getTopFiveNeutralCharacters()
     res.json({ fiveGood, fiveEvil, fiveNeutral })
   } catch (error) {
     if (error instanceof Error) {
