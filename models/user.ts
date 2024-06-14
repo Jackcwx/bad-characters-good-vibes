@@ -2,5 +2,5 @@
 export interface Manager {
   auth0_id: string
   name: string
-  prestinge: number
+  prestige: number
 }
