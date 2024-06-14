@@ -1,5 +1,6 @@
 import { IfAuth, IfNotAuth } from '@/components/Auth'
 import PageTitle from '@/components/PageTitle'
+import AddCharacterButton from '@/components/layout/AddCharacterButton'
 import { useManagersCharacters } from '@/hooks/manager'
 import { useParams } from 'react-router-dom'
 
@@ -15,8 +16,6 @@ function Manager() {
 
   if (isError) return <p>Something went Wrong!</p>
 
-  console.log(characters)
-
   return (
     <>
       <PageTitle title="Manager" />
@@ -28,6 +27,7 @@ function Manager() {
             ))}
           </ul>
         </div>
+        <AddCharacterButton />
       </IfAuth>
       <IfNotAuth>
         <p>Please sign in</p>

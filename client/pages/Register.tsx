@@ -30,7 +30,6 @@ function Register() {
 
   useEffect(() => {
     if (managers.data) {
-      console.log('working')
       navigate('/')
     }
   }, [managers.data, navigate])

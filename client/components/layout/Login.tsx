@@ -6,7 +6,6 @@ function Login() {
   const { user, logout, loginWithRedirect } = useAuth0()
 
   const handleLogin = () => {
-    console.log('logging in')
     return loginWithRedirect({
       authorizationParams: {
         redirect_uri: `${window.location.origin}/register`,
@@ -15,7 +14,6 @@ function Login() {
   }
 
   const handleLogout = () => {
-    console.log('logging out')
     return logout()
   }
 

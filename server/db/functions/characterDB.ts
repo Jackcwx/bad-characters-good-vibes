@@ -26,6 +26,7 @@ export async function getCharacterById(id: number): Promise<Character> {
       'bio',
       'evil_points as evilPoints',
       'good_points as goodPoints',
+      'manager_id as managerId',
       'img_url as imgUrl',
     )
     .first()
@@ -49,6 +50,7 @@ export async function addCharacter(data: CharacterData): Promise<number> {
     bio: data.bio,
     evil_points: 0,
     good_points: 0,
+    img_url: data.imgUrl,
   })
   return resp[0]
 }

@@ -10,6 +10,7 @@ import { Link } from 'react-router-dom'
 import Login from './Login'
 import AddCharacterButton from './AddCharacterButton.tsx'
 import ManagerPageButton from '../ManagerPageButton.tsx'
+import { IfAuth } from '../Auth.tsx'
 
 const links = [
   { name: 'Random', to: '/random' },
@@ -20,7 +21,7 @@ export default function Navigation() {
   return (
     <Popover as="nav" className="gradient-p-to-y relative">
       <div className="mx-auto max-w-7xl sm:px-2">
-        <div className="flex items-center justify-between py-4  lg:space-x-2">
+        <div className="flex items-center justify-between py-4 lg:space-x-2">
           {/* MOBILE */}
           <div className="-my-2 -mr-2 md:hidden">
             <Popover.Button className="inline-flex items-center justify-center rounded-md p-2 text-slate-600 mix-blend-luminosity hover:text-slate-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue">
@@ -66,9 +67,11 @@ export default function Navigation() {
 
           <div className="hidden items-center text-secondary md:flex md:flex-row">
             <span className="mr-5 text-sm lg:text-lg lg:leading-none"></span>
-            <AddCharacterButton />
             <Login />
             <ManagerPageButton />
+            <IfAuth>
+              <AddCharacterButton />
+            </IfAuth>
           </div>
         </div>
       </div>
